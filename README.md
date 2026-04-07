@@ -1,8 +1,8 @@
 # COLVDV/official-nordvpn-docker-gateway
-**[GUIDE] Route any Docker Container through the OFFICIAL NordVPN Image (with Meshnet access) without the use of 3rd Party Tools.**
+**[GUIDE] Route any Docker Container through the OFFICIAL NordVPN Linux Client in a Custom Docker Image (with Meshnet access) without 3rd Party Tools or Exposing LAN.**
 
 ## Why this guide?
- - Most online tutorials rely on third-party images (Gluetun, Bubuntux, etc.). This guide uses the official NordVPN Linux client built into a custom image. It’s cleaner, more secure, and utilizes Meshnet for effortless remote access without opening router ports.
+ - **Most online tutorials rely on third-party images (Gluetun, Bubuntux, etc.). This guide uses the official NordVPN Linux client built into a custom image.** *It’s cleaner, more secure, and utilizes Meshnet for effortless remote access without opening router ports.*
  - **Since installing NordVPN on a Linux machine currently requires local network access to be enabled in order for Meshnet peers to be able to access Docker containers, this is a solution that works around that so that you don't have to expose your entire machine to your Meshnet peers or mess with firewall stuff to solve that issue.**
 
 ## Instructions
