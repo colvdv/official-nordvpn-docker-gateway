@@ -1,0 +1,18 @@
+services:
+  audiobookshelf:
+    container_name: audiobookshelf
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    network_mode: "container:nordvpn-meshnet" # Attach to the NordVPN container
+    volumes:
+      # Media directories
+      - /mnt/filestorage/Audio:/Audio
+      - /mnt/filestorage/Documents:/Documents
+      - /mnt/filestorage/Video:/Video
+      # Application data
+      - /mnt/filestorage/_SYSTEM/~Audiobookshelf/backups:/Audiobookshelf Backups
+      - /mnt/filestorage/_SYSTEM/~Audiobookshelf/config:/config
+      - /mnt/filestorage/_SYSTEM/~Audiobookshelf/metadata:/metadata
+    environment:
+      - TZ=America/Denver
+      - ABS_BIND_ADDRESS=0.0.0.0
+    restart: unless-stopped
