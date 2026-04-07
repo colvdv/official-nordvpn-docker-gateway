@@ -100,4 +100,4 @@ The NordVPN Container (`nordvpn-meshnet`) should now access the `audiobookshelf`
 
 ### If you have any questions, open an [issue](https://github.com/colvdv/official-nordvpn-docker-gateway/issues) and I'll give it a look. Otherwise, happy networking!
 
-<h3 align="center">⭐ Star this repository! ⭐</h3>
+<h2 align="center">⭐ <ins>Star this repository!</ins> ⭐</h2>
