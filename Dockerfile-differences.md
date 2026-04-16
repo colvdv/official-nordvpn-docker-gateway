@@ -2,8 +2,8 @@
 Here are the specific differences between the two `Dockerfile`s broken down by category:
 
 ### 1. Package Management & Efficiency
-[NordVPN's OFFICIAL Dockerfile](https://support.nordvpn.com/hc/en-us/articles/20465811527057-How-to-build-the-NordVPN-Docker-image) contains redundancies that increase build time and potential for errors, while [Our Custom Dockerfile](https://github.com/colvdv/official-nordvpn-docker-gateway/blob/main/Dockerfile) optimizes the environment for networking.
- - **Redundancy:** The OFFICIAL script calls `apt-get install` for the same dependencies twice in a row. Our script consolidates these into a single, clean list.
+[NordVPN's OFFICIAL Dockerfile](https://support.nordvpn.com/hc/en-us/articles/20465811527057-How-to-build-the-NordVPN-Docker-image) contains redundancies that increase build time and potential for errors, while [Our Custom Dockerfile](https://github.com/colvdv/nordvpn-docker-gateway/blob/main/Dockerfile) optimizes the environment for networking.
+ - **Redundancy:** The OFFICIAL script calls `apt-get install` for the same dependencies twice in a row. Our script consolidates these into a single, clean layer.
  - **Essential Networking Tools:** Our Custom Dockerfile adds `iproute2` and `iptables`. Since NordVPN functions by manipulating network routing and firewall rules, these packages are often required for the VPN client to actually establish a secure tunnel.
  - **Readability:** Our version uses backslashes and indentation to make the dependency list legible, aligning with the excellence of clean code standards.
  
@@ -24,8 +24,6 @@ This is the functional difference in how the container behaves after starting.
  - **OFFICIAL NordVPN Dockerfile:** `/bin/bash -c "$@"`
  **Behavior:** Expects a command to be passed or falls back to an interactive bash shell.
  **Use Case:** Designed for interactive use where you want to type commands.
- - **Our Custom Dockerfile:** `tail -f /dev/null`
- **Behavior:** Stays alive indefinitely by "watching" an empty file.
- **Use Case:** Designed for a "Service" or "Sidecar" container that runs in the background.
- 
- 
+ - **Our Custom Dockerfile:** `while true; do sleep 10 & wait $!; done`
+ **Behavior:** Stays alive indefinitely by running a non-blocking wait loop.
+ **Use Case:** Designed specifically for a "Service" or "Sidecar" container that provides a persistent network for other containers to route through.
