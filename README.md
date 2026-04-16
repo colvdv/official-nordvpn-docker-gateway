@@ -1,6 +1,9 @@
 # COLVDV/official-nordvpn-docker-gateway
 ### **[GUIDE] Route any Docker Container through the OFFICIAL NordVPN Linux Client in a Custom Docker Image (with Meshnet access) without 3rd-Party Tools or Exposing LAN**
 
+> [!NOTE]
+> This is an unofficial community project utilizing the official NordVPN Linux client.
+
 ## Why this guide?
  - **🚫 Third-Party Bloat:** Most online tutorials rely on third-party images (Gluetun, Bubuntux, etc.). This guide uses the official NordVPN Linux client built into a custom image. *It’s cleaner, more secure, and utilizes Meshnet for effortless remote access without opening router ports.*
  - **🔒 Security Sandbox:** Since the [NordVPN client on Linux currently requires local network access to be enabled in order for Meshnet peers to be able to access Docker containers](https://meshnet.nordvpn.com/troubleshooting/linux#cannot-access-docker-containers-over-meshnet), this is a solution that works around that so that you don't have to expose your entire machine or LAN to your Meshnet peers or to mess with firewall stuff to solve that issue.
@@ -12,7 +15,11 @@ This guide will walk you through the creation of all of the files, their content
 Create a directory (e.g. `sudo mkdir ~/nordvpn-meshnet/`), open it (e.g. `cd ~/nordvpn-meshnet/`) and save the following as `Dockerfile` inside it (e.g. `sudo nano Dockerfile`, keyboard shortcut `Shift+Insert` to paste with formatting, then `Ctrl+X` to save, followed by `y` to confirm saving, then `Enter` to confirm filename):
 
 ```
-FROM ubuntu:24.04
+FROM ubuntu:24.04@sha256:3a4c9877b483ab46d7c3fbe165a0db275e1ae3cfe56a5657e5a47c2f99a99d1e
+
+LABEL maintainer="COLVDV" \
+      version="1.1.0" \
+      description="NordVPN Docker Gateway with Meshnet"
 
 # Install dependencies and NordVPN in a single clean layer
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -24,12 +31,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && wget -qO /etc/apt/trusted.gpg.d/nordvpn_public.asc https://repo.nordvpn.com/gpg/nordvpn_public.asc \
     && echo "deb https://repo.nordvpn.com/deb/nordvpn/debian stable main" > /etc/apt/sources.list.d/nordvpn.list \
     && apt-get update \
-    && apt-get install -y --no-install-recommends nordvpn \
+    && apt-get install -y --no-install-recommends nordvpn=4.5.0 \ # Specify desired NordVPN version here; 4.5.0 is the latest as of this writing.
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # The Anchor: Starts the service, waits for initialization, then stays alive
-ENTRYPOINT ["/bin/bash", "-c", "rm -rf /run/nordvpn && mkdir -p /run/nordvpn && /etc/init.d/nordvpn start && sleep 5 && tail -f /dev/null"]
+ENTRYPOINT ["/bin/bash", "-c", "\
+    rm -rf /run/nordvpn && mkdir -p /run/nordvpn && \
+    /etc/init.d/nordvpn start && \
+    timeout 30 bash -c 'until nordvpn status &>/dev/null; do sleep 1; done' && \
+    trap '/etc/init.d/nordvpn stop; exit 0' SIGTERM SIGINT; \
+    while true; do sleep 10 & wait $!; done"]
 ```
 This Dockerfile is a slightly modified version of the one we are instructed to create when following [the official guide on 'How to build the NordVPN Docker image'](https://support.nordvpn.com/hc/en-us/articles/20465811527057-How-to-build-the-NordVPN-Docker-image). For an explanation on what we've changed and why, [read this](https://github.com/colvdv/official-nordvpn-docker-gateway/blob/main/Dockerfile-differences.md).
 
@@ -101,3 +113,6 @@ The NordVPN Container (`nordvpn-meshnet`) should now access the `audiobookshelf`
 ### Feedback is appreciated! If you have any questions or issues, open an [issue](https://github.com/colvdv/official-nordvpn-docker-gateway/issues) and I'll give it a look. Otherwise, happy networking!
 
 <h2 align="center">⭐ <ins>Star this repository!</ins> ⭐</h2>
+
+> [!NOTE]
+> **Legal Disclaimer:** This project uses the official NordVPN Linux client binary but is not endorsed by, affiliated with, or maintained by NordVPN. All trademarks and logos are the property of their respective owners.
