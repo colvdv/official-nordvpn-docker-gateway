@@ -115,5 +115,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VERSION_TAG="v${{ steps.get_version.outputs.VERSION }}"
-          gzip -9 "/tmp/${{ env.SAFE_REPO_NAME }}-v${{ steps.get_version.outputs.VERSION }}.tar"
-          gh release upload "$VERSION_TAG" "/tmp/${{ env.SAFE_REPO_NAME }}-v${{ steps.get_version.outputs.VERSION }}.tar.gz" --clobber || true
+          FILE_PATH="/tmp/${{ env.SAFE_REPO_NAME }}-v${{ steps.get_version.outputs.VERSION }}.tar"
+          GZ_PATH="${FILE_PATH}.gz"
+          
+          gzip -9 "$FILE_PATH"
+          
+          # Check if the release (draft or published) exists
+          if gh release view "$VERSION_TAG" > /dev/null 2>&1; then
+            echo "Release $VERSION_TAG found. Uploading asset..."
+            gh release upload "$VERSION_TAG" "$GZ_PATH" --clobber
+          else
+            echo "::warning::Release $VERSION_TAG not found (neither published nor draft). Skipping upload."
+          fi
