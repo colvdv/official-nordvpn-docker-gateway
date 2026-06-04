@@ -412,5 +412,7 @@ If you have any feedback, questions, or issues, open an [issue](https://github.c
 </a>
 </div>
 
+<br>
+
 > [!NOTE]
 > **Legal Disclaimer:** This project uses the official NordVPN Linux client binary but is not endorsed by, affiliated with, or maintained by NordVPN. All trademarks and logos are the property of their respective owners.
