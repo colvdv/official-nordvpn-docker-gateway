@@ -19,7 +19,8 @@ jobs:
         with:
           token: ${{ secrets.MY_PAT }}
       
-      - name: Compare Versions
+      # Check the official NordVPN Linux repo for latest release version.
+      - name: Compare NordVPN Linux Release Version
         id: compare
         run: |
           # 1. Extract version from Dockerfile (e.g., 4.6.0)
@@ -39,7 +40,8 @@ jobs:
           echo "DOCKER_VERSION=$DOCKER_VERSION" >> $GITHUB_ENV
           echo "COLOR=$COLOR" >> $GITHUB_ENV
 
-      - name: Update Badge
+      # Sync NordVPN badge in README with pinned Docker image version.
+      - name: Update NordVPN Version Badge in README
         run: |
           # Construct the badge URL
           BADGE_URL="https://img.shields.io/badge/NordVPN-v${{ env.DOCKER_VERSION }}-${{ env.COLOR }}"
