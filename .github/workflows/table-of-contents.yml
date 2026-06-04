@@ -19,12 +19,11 @@ jobs:
         uses: technote-space/toc-generator@9e238e7974de5fcf7b17b7acc54c896160dda0a3
         with:
           TOC_TITLE: "#### 📑 Table of Contents:"
-          # Using your existing markers to ensure perfect integration
           OPENING_COMMENT: "<!-- OPEN table-of-contents.yml -->"
           CLOSING_COMMENT: "<!-- CLOSE table-of-contents.yml -->"
-          # Corrected parameter name for this version
           MAX_HEADER_LEVEL: 4
           FOLDING: false
+          CREATE_PR: false
 
       - name: Commit changes to README.md
         uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9
