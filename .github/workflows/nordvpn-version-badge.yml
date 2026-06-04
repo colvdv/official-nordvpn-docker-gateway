@@ -49,9 +49,13 @@ jobs:
           # Use sed to target only the image source portion within the markdown link
           sed -i "s|\[!\[NordVPN\](https://img.shields.io/badge/NordVPN-[^)]*)|[![NordVPN]($BADGE_URL)|g" README.md
           
-          # Commit and push the changes back to the repository
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add README.md
-          git commit -m "Update NordVPN version badge to v${{ env.DOCKER_VERSION }}" || echo "No changes needed"
-          git push
+          # Only commit if there are actual changes
+          if [[ -n $(git status -s README.md) ]]; then
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            git add README.md
+            git commit -m "Update NordVPN version badge to v${{ env.DOCKER_VERSION }}"
+            git push
+          else
+            echo "NordVPN version in README.md already up to date. No commit needed."
+          fi
