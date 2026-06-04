@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main", "master" ]
     paths:
-      - '/nordvpn-meshnet/Dockerfile'
+      - 'nordvpn-meshnet/Dockerfile'
   workflow_dispatch:
 
 env:
