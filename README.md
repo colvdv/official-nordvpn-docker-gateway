@@ -188,7 +188,7 @@ docker build -t nordvpn-docker-gateway .
 ```
 <br>
 
-👉🔗 **Jump to [Step 2: Deploy the NordVPN Gateway Container](#-step-2-deploy-the-nordvpn-gateway-container)**
+👉🔗 **Jump to [Step 2: Deploy the NordVPN Gateway Container](#-step-2-setup--deploy-the-nordvpn-gateway-container)**
 
 <br>
 
@@ -202,7 +202,7 @@ docker build -t nordvpn-docker-gateway .
    docker pull ghcr.io/colvdv/nordvpn-docker-gateway:v1.3
    ```
 > [!NOTE]
-> If pulling an image, you'll need to update the image reference at the bottom of your `docker run` command ([Docker](#method-a-docker-run-command)) / ensure the correct image line is uncommented in your `docker-compose.yml` file ([Docker Compose](#method-b-docker-compose-recommended)).
+> If pulling an image, you'll need to update the image reference at the bottom of your `docker run` command ([Docker](#method-a-docker-run-command)) / ensure the correct image line is uncommented in your `docker-compose.yml` file ([Docker Compose](#-method-b-docker-compose-recommended)).
 > 
 > **Docker Example:** `nordvpn-docker-gateway` becomes `ghcr.io/colvdv/nordvpn-docker-gateway:latest`.
 >
@@ -248,7 +248,7 @@ docker run -d \
    nordvpn-docker-gateway
 ```
 > [!NOTE]
-> **Recommended:** Instead of using the `docker run` command provided above, you can [use Docker Compose to deploy the container](#method-b-docker-compose-recommended).
+> **Recommended:** Instead of using the `docker run` command provided above, you can [use Docker Compose to deploy the container](#-method-b-docker-compose-recommended).
 
 👉🔗 **Once the container is deployed, [Configure NordVPN Meshnet](#configure-nordvpn-meshnet).**
 
@@ -307,7 +307,7 @@ Then deploy the container:
 ```
 docker compose up -d
 ```
-👉🔗 **Once the container is deployed, [Configure NordVPN Meshnet](#configure-nordvpn-meshnet).**
+👉🔗 **Once the container is deployed, [Configure NordVPN Meshnet](#%EF%B8%8F-configure-nordvpn-meshnet).**
 
 <br>
 
