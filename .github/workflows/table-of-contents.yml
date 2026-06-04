@@ -18,11 +18,12 @@ jobs:
       - name: Generate Table of Contents
         uses: technote-space/toc-generator@9e238e7974de5fcf7b17b7acc54c896160dda0a3
         with:
-          # This ensures it looks for specific markers in your README
           TOC_TITLE: "#### 📑 Table of Contents:"
-          # Define the nesting levels to match your hierarchy
-          MAX_LEVEL: 4
-          # This helps keep your existing structure clean
+          # Using your existing markers to ensure perfect integration
+          OPENING_COMMENT: "<!-- OPEN table-of-contents.yml -->"
+          CLOSING_COMMENT: "<!-- CLOSE table-of-contents.yml -->"
+          # Corrected parameter name for this version
+          MAX_HEADER_LEVEL: 4
           FOLDING: false
 
       - name: Commit changes to README.md
