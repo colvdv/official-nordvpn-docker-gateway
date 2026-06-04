@@ -29,7 +29,6 @@
 <br>
 
 ## Overview
-<!-- OPEN table-of-contents.yml -->
 #### 📑 Table Of Contents:
  - ❔ **[Why This Project?](#-why-this-project)**
    - **[Overview](#overview)**
@@ -48,7 +47,6 @@
      - ⚙️ **[Configure NordVPN Meshnet](#%EF%B8%8F-configure-nordvpn-meshnet)**
    - 🔗 **[Step 3: Link & Deploy Application Container](#-step-3-link--deploy-application-container-audiobookshelf-example)**
 - 🎉 **[Conclusion & Notes](#conclusion--notes-)**
-<!-- CLOSE table-of-contents.yml -->
 
 <br>
 
