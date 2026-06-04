@@ -107,7 +107,7 @@ LABEL org.opencontainers.image.authors="COLVDV" \
       org.opencontainers.image.description="NordVPN Docker Gateway with Meshnet" \
       org.opencontainers.image.version="1.3" \
       org.opencontainers.image.url="https://github.com/colvdv/nordvpn-docker-gateway" \
-      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.licenses="Apache-2.0" \
       capabilities.net_admin="required" \
       capabilities.net_raw="required"
 
