@@ -1,4 +1,4 @@
-## The OFFICIAL NordVPN Dockerfile vs. Our Custom Dockerfile (v1.2.5)
+## The OFFICIAL NordVPN Dockerfile vs. Our Custom Dockerfile _(updated for v1.3)_
 Here are the specific differences between the two `Dockerfile`s broken down by category:
 
 ### 1. Security & Image Integrity
