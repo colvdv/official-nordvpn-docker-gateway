@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="54" viewBox="0 0 250 54">
+  <rect width="250" height="54" rx="10" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="18" y="36" font-size="24">☕</text>
+  <text x="54" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#666666" letter-spacing="0.8">SUPPORT THE CREATOR</text>
+  <text x="54" y="41" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#000000">Buy Me A Coffee</text>
+</svg>
