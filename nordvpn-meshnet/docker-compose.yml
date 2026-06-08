@@ -7,7 +7,7 @@
 # Instructions:
 # 1. Uncomment the appropriate image line to choose which Docker image to use.
 # 2. Uncomment lines to open the appropriate ports.
-# 3. Save this file as docker-compose.yml (e.g. ~/nordvpn-meshnet/docker-compose.yml).
+# 3. Save this file as docker-compose.yml (e.g., ~/nordvpn-meshnet/docker-compose.yml).
 # 4. Start the `nordvpn-meshnet` container: `docker compose up -d`.
 # 5. Start your application (audiobookshelf, jellyfin, etc.) containers with `network_mode: "container:nordvpn-meshnet"` to link them to the `nordvpn-meshnet` container network.
 
