@@ -23,7 +23,7 @@
 <br>
 
 # ❔ Why this project?
- - **🚫 Third-Party Bloat:** Most online tutorials rely solely on third-party images (Gluetun, Bubuntux, etc.). This guide uses the official NordVPN Linux client built into a custom image that you can build yourself. *It’s cleaner, more secure, and utilizes Meshnet for effortless remote access without opening router ports.*
+ - **🚫 Third-Party Bloat:** Most online tutorials rely solely on third-party images (Gluetun, Bubuntux, etc.). This project uses the official NordVPN Linux client built into a custom image that you can build yourself. *It’s cleaner, more secure, and utilizes Meshnet for effortless remote access without opening router ports.*
  - **🔒 Security Sandbox:** Since the [NordVPN client on Linux currently requires local network access to be enabled in order for Meshnet peers to be able to access Docker containers](https://meshnet.nordvpn.com/troubleshooting/linux#cannot-access-docker-containers-over-meshnet), this is a solution that works around that so that you don't have to expose your entire machine or LAN to your Meshnet peers or to mess with firewall stuff to solve that issue.
 
 <br>
@@ -134,7 +134,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/nordvpn.asc /root/.gnupg
 
-# HEALTHCHECK: Uses gosu to check status as the non-privileged user
+# HEALTHCHECK: Uses gosu to check status as the non-privileged user.
+# The healthcheck validates daemon responsiveness, not VPN connectivity. This allows Meshnet-only deployments to remain healthy without requiring an active VPN tunnel.
 HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
     CMD gosu norduser nordvpn status | grep -qE "Status: Disconnected|Status: Connected" || exit 1
 
@@ -312,7 +313,7 @@ docker compose up -d
 <br>
 
 ### ⚙️ Configure NordVPN Meshnet
-Once the NordVPN Container is deployed, Meshnet will need to be configured to allow traffic through.
+Once the NordVPN Container is deployed, Meshnet will need to be configured to allow peer traffic through.
 
 > [!TIP]
 > After the NordVPN Docker Container is up & running, interact with NordVPN using the following command format: `docker exec -it <container-name> nordvpn <COMMAND>` (e.g. `docker exec -it nordvpn-meshnet nordvpn status`).
