@@ -43,6 +43,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* /tmp/nordvpn.asc /root/.gnupg
 
 # HEALTHCHECK: Uses gosu to check status as the non-privileged user
+# The healthcheck validates daemon responsiveness, not VPN connectivity. This allows Meshnet-only deployments to remain healthy without requiring an active VPN tunnel.
 HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
     CMD gosu norduser nordvpn status | grep -qE "Status: Disconnected|Status: Connected" || exit 1
 
