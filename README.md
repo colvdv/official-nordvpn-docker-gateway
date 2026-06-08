@@ -74,7 +74,7 @@ graph TD
 ## 👉 Step 1: Acquire Docker Image
 
 > [!IMPORTANT]
-> I have added a [GitHub Actions workflow](https://github.com/colvdv/nordvpn-docker-gateway/actions/workflows/docker-image.yml) to build a docker image from [`Dockerfile`](https://github.com/colvdv/nordvpn-docker-gateway/blob/main/nordvpn-meshnet/Dockerfile) every time it is updated. The built image supports both `amd64` and `arm64` architectures and is attached as an asset (e.g.`nordvpn-docker-gateway-v1.x.x.tar.gz`) to the relevant release, starting with `v1.2.5`. View the `nordvpn-docker-gateway` package [here](https://github.com/colvdv/nordvpn-docker-gateway/pkgs/container/nordvpn-docker-gateway).
+> I have added a [GitHub Actions workflow](https://github.com/colvdv/nordvpn-docker-gateway/actions/workflows/docker-image.yml) to build a docker image from [`Dockerfile`](https://github.com/colvdv/nordvpn-docker-gateway/blob/main/nordvpn-meshnet/Dockerfile) every time it is updated. The built image supports both `amd64` and `arm64` architectures and is attached as an asset (e.g.,`nordvpn-docker-gateway-v1.x.x.tar.gz`) to the relevant release, starting with `v1.2.5`. View the `nordvpn-docker-gateway` package [here](https://github.com/colvdv/nordvpn-docker-gateway/pkgs/container/nordvpn-docker-gateway).
 
 **Select your preferred method to begin:**
 * 🚀 [**Method 1: Build Image from Source**](#-method-1-build-image-from-source)
@@ -87,7 +87,7 @@ Follow these steps to build the nordvpn-docker-gateway image from source. Altern
 
 ### 🛠️ 1. Create the Dockerfile for the NordVPN Container Image
 
-Create a directory (e.g. `mkdir ~/nordvpn-meshnet/`), open it (e.g. `cd ~/nordvpn-meshnet/`) and save the following as `Dockerfile` inside it (e.g. `nano Dockerfile`, keyboard shortcut `Shift+Insert` to paste with formatting, then `Ctrl+X` to save, followed by `y` to confirm saving, then `Enter` to confirm filename):
+Create a directory (e.g., `mkdir ~/nordvpn-meshnet/`), open it (e.g., `cd ~/nordvpn-meshnet/`) and save the following as `Dockerfile` inside it (e.g. `nano Dockerfile`, keyboard shortcut `Shift+Insert` to paste with formatting, then `Ctrl+X` to save, followed by `y` to confirm saving, then `Enter` to confirm filename):
 
 ```
 # REQUIRED RUNTIME ARGUMENTS:
@@ -256,7 +256,7 @@ docker run -d \
 <br>
 
 ### 🐙 Method B: Docker Compose _(recommended)_
-To use Docker Compose, create a `docker-compose.yml` file (e.g. `nano ~/nordvpn-meshnet/docker-compose.yml`) with the following contents:
+To use Docker Compose, create a `docker-compose.yml` file (e.g., `nano ~/nordvpn-meshnet/docker-compose.yml`) with the following contents:
 ```
 # NordVPN Docker Gateway by COLVDV
 # https://github.com/colvdv/nordvpn-docker-gateway
@@ -267,7 +267,7 @@ To use Docker Compose, create a `docker-compose.yml` file (e.g. `nano ~/nordvpn-
 # Instructions:
 # 1. Uncomment the appropriate image line to choose which Docker image to use.
 # 2. Uncomment lines to open the appropriate ports.
-# 3. Save this file as docker-compose.yml (e.g. ~/nordvpn-meshnet/docker-compose.yml).
+# 3. Save this file as docker-compose.yml (e.g., ~/nordvpn-meshnet/docker-compose.yml).
 # 4. Start the `nordvpn-meshnet` container: `docker compose up -d`.
 # 5. Start your application (audiobookshelf, jellyfin, etc.) containers with `network_mode: "container:nordvpn-meshnet"` to link them to the `nordvpn-meshnet` container network.
 
@@ -341,6 +341,9 @@ docker exec -it nordvpn-meshnet nordvpn meshnet peer list
    ```
    docker exec -it nordvpn-meshnet nordvpn meshnet peer incoming allow <device>
    ```
+> [!TIP]
+> **Optional Hardening Tip:** Activate NordVPN's built-in killswitch with `nordvpn set killswitch on` (e.g. `docker exec -it nordvpn-meshnet nordvpn set killswitch on`). This will prevent all non-VPN traffic from going through.
+> (**Note:** For Meshnet-only deployments, leave this off or your application container won't have internet access.)
 
 <br>
 
